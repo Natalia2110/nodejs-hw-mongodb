@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-// import { getAllContacts, getContactById } from '../services/contacts.js';
 import {
   getContactsControler,
   getContactByIdController,
@@ -15,38 +14,48 @@ import {
   updateContactSchema,
 } from '../validation/contacts.js';
 import { isValidId } from '../middlewares/isValidId.js';
+import { authenticate } from '../middlewares/authenticate.js';
+import { checkRoles } from '../middlewares/checkRoles.js';
+import { ROLES } from '../constants/index.js';
 
 const router = Router();
 
-router.get('/contacts', ctrlWrapper(getContactsControler));
+router.use(authenticate);
+
+router.get('/', checkRoles(ROLES.USER), ctrlWrapper(getContactsControler));
 
 router.get(
-  '/contacts/:contactId',
+  '/:contactId',
+  checkRoles(ROLES.USER, ROLES.PARENT),
   isValidId,
   ctrlWrapper(getContactByIdController),
 );
 
 router.post(
-  '/contacts',
+  '/',
+  checkRoles(ROLES.USER),
   validateBody(createContactSchema),
   ctrlWrapper(createContactsController),
 );
 
 router.delete(
-  '/contacts/:contactId',
+  '/:contactId',
+  checkRoles(ROLES.USER),
   isValidId,
   ctrlWrapper(deleteContactController),
 );
 
 router.put(
-  '/contacts/:contactId',
+  '/:contactId',
+  checkRoles(ROLES.USER),
   isValidId,
   validateBody(createContactSchema),
   ctrlWrapper(upsertContactController),
 );
 
 router.patch(
-  '/contacts/:contactId',
+  '/:contactId',
+  checkRoles(ROLES.USER, ROLES.PARENT),
   isValidId,
   validateBody(updateContactSchema),
   ctrlWrapper(patchContactController),
