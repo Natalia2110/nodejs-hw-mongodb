@@ -11,7 +11,6 @@ export const getAllContacts = async ({
 }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
-  // const skip = page > 0 ? (page - 1) * perPage : 0;
 
   const contactsQuery = ContactsCollection.find();
 
@@ -38,9 +37,6 @@ export const getAllContacts = async ({
     data: contacts,
     ...paginationData,
   };
-
-  // const contacts = await ContactsCollection.find();
-  // return contacts;
 };
 
 export const getContactById = async (contactId) => {

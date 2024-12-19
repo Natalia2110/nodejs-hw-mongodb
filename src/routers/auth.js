@@ -11,11 +11,9 @@ import { loginUserController } from '../controllers/auth.js';
 import { refreshUserSessionController } from '../controllers/auth.js';
 
 const router = Router();
-// const jsonParser = express.json();
 
 router.post(
   '/register',
-  // jsonParser,
   validateBody(registerUserSchema),
   ctrlWrapper(registerUserController),
 );
