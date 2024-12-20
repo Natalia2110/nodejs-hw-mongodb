@@ -15,44 +15,38 @@ import {
 } from '../validation/contacts.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { authenticate } from '../middlewares/authenticate.js';
-// import { checkRoles } from '../middlewares/checkRoles.js';
-// import { ROLES } from '../constants/index.js';
+
 
 const router = Router();
 
 router.use(authenticate);
-// router.get('/', ctrlWrapper(getContactsControler));
+
 
 router.get(
   '/',
-  // checkRoles(ROLES.USER),
   ctrlWrapper(getContactsControler),
 );
 
 router.get(
   '/:contactId',
-  // checkRoles(ROLES.USER, ROLES.PARENT),
   isValidId,
   ctrlWrapper(getContactByIdController),
 );
 
 router.post(
   '/',
-  // checkRoles(ROLES.USER),
   validateBody(createContactSchema),
   ctrlWrapper(createContactsController),
 );
 
 router.delete(
   '/:contactId',
-  // checkRoles(ROLES.USER),
   isValidId,
   ctrlWrapper(deleteContactController),
 );
 
 router.put(
   '/:contactId',
-  // checkRoles(ROLES.USER),
   isValidId,
   validateBody(createContactSchema),
   ctrlWrapper(upsertContactController),
@@ -60,7 +54,6 @@ router.put(
 
 router.patch(
   '/:contactId',
-  // checkRoles(ROLES.USER, ROLES.PARENT),
   isValidId,
   validateBody(updateContactSchema),
   ctrlWrapper(patchContactController),
