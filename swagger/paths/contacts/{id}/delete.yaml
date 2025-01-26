@@ -13,19 +13,21 @@ parameters:
       type: string
       example: '65ca67e7ae7f10c88b598384'
 responses:
-  '200':
+  '204':
     description: 'Delete contact by id'
-    content:
-      application/json:
-        schema:
-          type: object
-          required:
-            - status
+  # '200':
+  #   description: 'Delete contact by id'
+  #   content:
+  #     application/json:
+  #       schema:
+  #         type: object
+  #         required:
+  #           - status
 
-          properties:
-            status:
-              type: integer
-              example: 200
+  #         properties:
+  #           status:
+  #             type: integer
+  #             example: 200
 
   '401':
     $ref: ../../../components/responses/401.yaml

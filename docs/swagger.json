@@ -14,7 +14,7 @@
       "url": "http://127.0.0.1:3000"
     },
     {
-      "url": "https://hw6-email-and-image-hfpq.onrender.com"
+      "url": "https://hw7-swagger-20iw.onrender.com"
     }
   ],
   "tags": [
@@ -73,27 +73,6 @@
                 "desc"
               ],
               "example": "asc"
-            }
-          },
-          {
-            "in": "query",
-            "name": "isFavourite",
-            "schema": {
-              "type": "boolean",
-              "example": true
-            }
-          },
-          {
-            "in": "query",
-            "name": "contactType",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "personal",
-                "home",
-                "work"
-              ],
-              "example": "personal"
             }
           }
         ],
@@ -223,6 +202,12 @@
                       "home",
                       "work"
                     ]
+                  },
+                  "photo": {
+                    "description": "Link to contact's photo",
+                    "type": "string",
+                    "format": "binary",
+                    "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
                   }
                 }
               }
@@ -394,6 +379,7 @@
                   "photo": {
                     "description": "Link to contact's photo",
                     "type": "string",
+                    "format": "binary",
                     "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
                   }
                 }
@@ -466,24 +452,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Delete contact by id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    }
-                  }
-                }
-              }
-            }
+          "204": {
+            "description": "Delete contact by id"
           },
           "401": {
             "$ref": "#/components/responses/401"
